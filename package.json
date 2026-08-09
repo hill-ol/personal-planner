@@ -1,0 +1,7 @@
+{
+  "name": "personal-planner",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ]
+}

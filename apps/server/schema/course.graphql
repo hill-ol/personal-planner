@@ -1,0 +1,8 @@
+type Course {
+    id: ID!
+    name: String!
+    instructor: String
+    location: String
+    recurrence: Recurrence!
+    color: String!
+}

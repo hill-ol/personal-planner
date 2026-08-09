@@ -1,0 +1,8 @@
+type WeeklyRecap {
+    id: ID!
+    weekStartDate: DateTime!
+    topSong: SongInfo
+    moodTrend: Mood
+    completionRate: Float!
+    highlightPhoto: String
+}

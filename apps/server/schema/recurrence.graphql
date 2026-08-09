@@ -1,0 +1,31 @@
+enum RecurrenceFrequency {
+    DAILY
+    WEEKLY
+    MONTHLY
+}
+
+enum Weekday {
+    MONDAY
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+}
+
+enum RecurrenceEndCondition {
+    NEVER
+    ON_DATE
+    AFTER_N_OCCURRENCES
+}
+
+type Recurrence {
+    frequency: RecurrenceFrequency!
+    interval: Int!
+    daysOfWeek: [Weekday!]
+    endCondition: RecurrenceEndCondition!
+    endDate: DateTime
+    occurrenceCount: Int
+    time: Time
+}

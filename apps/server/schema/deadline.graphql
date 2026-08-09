@@ -1,0 +1,16 @@
+enum DeadlineCategory {
+    WORK
+    CLASS
+    PERSONAL
+    OTHER
+}
+
+type Deadline implements Item {
+    id: ID!
+    name: String!
+    startDate: DateTime!
+    time: Time
+    recurrence: Recurrence
+    status: ItemStatus!
+    category: DeadlineCategory!
+}

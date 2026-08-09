@@ -1,0 +1,23 @@
+type SongInfo {
+    spotifyId: String!
+    title: String!
+    artist: String!
+    albumArtUrl: String
+}
+
+enum Mood {
+    GREAT
+    GOOD
+    NEUTRAL
+    TIRED
+    STRESSED
+    SAD
+}
+
+type DayEntry {
+    id: ID!
+    date: DateTime!
+    mood: Mood
+    songOfTheDay: SongInfo
+    photo: String
+}

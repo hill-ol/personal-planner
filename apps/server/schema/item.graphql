@@ -1,0 +1,16 @@
+enum ItemStatus {
+    PENDING
+    DONE
+}
+
+scalar DateTime
+scalar Time
+
+interface Item {
+    id: ID!
+    name: String!
+    startDate: DateTime!
+    time: Time
+    recurrence: Recurrence
+    status: ItemStatus!
+}

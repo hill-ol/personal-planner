@@ -1,0 +1,18 @@
+enum AssignmentType {
+    HOMEWORK
+    QUIZ
+    EXAM
+    PROJECT
+    OTHER
+}
+
+type Assignment implements Item {
+    id: ID!
+    name: String!
+    startDate: DateTime!
+    time: Time
+    recurrence: Recurrence
+    status: ItemStatus!
+    assignmentType: AssignmentType!
+    courseId: ID
+}

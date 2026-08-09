@@ -1,0 +1,11 @@
+type SocialEvent implements Item {
+    id: ID!
+    name: String!
+    status: ItemStatus!
+    startDate: DateTime!
+    time: Time
+    endDate: DateTime!
+    recurrence: Recurrence
+    invitees: [String!]
+    location: String
+}
