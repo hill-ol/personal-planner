@@ -1,3 +1,8 @@
+type Person {
+    id: ID!
+    name: String!
+}
+
 type SocialEvent implements Item {
     id: ID!
     name: String!
@@ -6,6 +11,6 @@ type SocialEvent implements Item {
     time: Time
     endDate: DateTime!
     recurrence: Recurrence
-    invitees: [String!]
+    invitees: [Person!]
     location: String
 }

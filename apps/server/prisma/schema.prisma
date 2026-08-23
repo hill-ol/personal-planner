@@ -1,13 +1,172 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum ItemType {
+  ASSIGNMENT
+  DEADLINE
+  SOCIAL_EVENT
+}
+
+enum ItemStatus {
+  PENDING
+  DONE
+}
+
+enum AssignmentType {
+  HOMEWORK
+  QUIZ
+  EXAM
+  PROJECT
+  OTHER
+}
+
+enum DeadlineCategory {
+  WORK
+  CLASS
+  PERSONAL
+  OTHER
+}
+
+enum RecurrenceFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum RecurrenceEndCondition {
+  NEVER
+  ON_DATE
+  AFTER_N_OCCURRENCES
+}
+
+enum Mood {
+  GREAT
+  GOOD
+  NEUTRAL
+  TIRED
+  STRESSED
+  SAD
+}
+
+model Item {
+  id        String     @id @default(uuid())
+  name      String
+  startDate DateTime
+  time      DateTime?
+  status    ItemStatus
+  type      ItemType
+
+  reccurenceId String?     @unique
+  recurrence   Recurrence? @relation(fields: [reccurenceId], references: [id])
+
+  assignment  Assignment?
+  deadline    Deadline?
+  socialEvent SocialEvent?
+}
+
+model Assignment {
+  id             String         @id
+  assignmentType AssignmentType
+  courseId       String?
+  course         Course?        @relation(fields: [courseId], references: [id])
+
+  item Item @relation(fields: [id], references: [id])
+}
+
+model Deadline {
+  id       String           @id
+  category DeadlineCategory
+
+  item Item @relation(fields: [id], references: [id])
+}
+
+model Person {
+  id     String        @id @default(uuid())
+  name   String
+  events SocialEvent[]
+}
+
+model SocialEvent {
+  id       String   @id
+  endDate  DateTime
+  location String?
+  invitees Person[]
+
+  item Item @relation(fields: [id], references: [id])
+}
+
+model Recurrence {
+  id             String                 @id @default(uuid())
+  frequency      RecurrenceFrequency
+  interval       Int
+  daysOfWeek     String?
+  endCondition   RecurrenceEndCondition
+  endDate        DateTime?
+  occurenceCount Int?
+  time           DateTime?
+
+  item   Item?
+  course Course?
+  habit  Habit?
+}
+
+model Course {
+  id         String  @id @default(uuid())
+  name       String
+  instructor String?
+  location   String?
+  color      String
+
+  recurrenceId String     @unique
+  recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
+
+  assignments Assignment[]
+}
+
+model Habit {
+  id            String @id @default(uuid())
+  name          String
+  currentStreak Int
+  longestStreak Int
+
+  recurrenceId String     @unique
+  recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
+
+  completions  HabitCompletion[]
+}
+
+model HabitCompletion {
+  id          String   @id @default(uuid())
+  completedAt DateTime
+
+  habitId String
+  habit   Habit  @relation(fields: [habitId], references: [id])
+}
+
+model WeeklyRecap {
+  id             String   @id @default(uuid())
+  weekStartDate  DateTime
+  moodTrend      Mood?
+  completionRate Float
+  highlightPhoto String?
+
+  songInfoId String?   @unique
+  songInfo   SongInfo? @relation(fields: [songInfoId], references: [id])
+}
+
+model SongInfo {
+  id           String       @id @default(uuid())
+  spotifyId    String
+  title        String
+  artist       String
+  albumArtUrl  String?
+
+  dayEntry     DayEntry?
+  weeklyRecap  WeeklyRecap?
 }

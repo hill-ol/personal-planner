@@ -1,8 +1,13 @@
+type HabitCompletion {
+    id: ID!
+    completedAt: DateTime!
+}
+
 type Habit {
     id: ID!
     name: String!
     recurrence: Recurrence!
     currentStreak: Int!
     longestStreak: Int!
-    completions: [DateTime!]
+    completions: [HabitCompletion!]!
 }
