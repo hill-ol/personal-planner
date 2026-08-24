@@ -61,8 +61,8 @@ model Item {
   status    ItemStatus
   type      ItemType
 
-  recurenceId String?     @unique
-  recurrence   Recurrence? @relation(fields: [recurenceId], references: [id])
+  recurrenceId String?     @unique
+  recurrence   Recurrence? @relation(fields: [recurrenceId], references: [id])
 
   assignment  Assignment?
   deadline    Deadline?
@@ -75,14 +75,14 @@ model Assignment {
   courseId       String?
   course         Course?        @relation(fields: [courseId], references: [id])
 
-  item Item @relation(fields: [id], references: [id])
+  item Item @relation(fields: [id], references: [id], onDelete: Cascade)
 }
 
 model Deadline {
   id       String           @id
   category DeadlineCategory
 
-  item Item @relation(fields: [id], references: [id])
+  item Item @relation(fields: [id], references: [id], onDelete: Cascade)
 }
 
 model Person {
@@ -97,7 +97,7 @@ model SocialEvent {
   location String?
   invitees Person[]
 
-  item Item @relation(fields: [id], references: [id])
+  item Item @relation(fields: [id], references: [id], onDelete: Cascade)
 }
 
 model Recurrence {

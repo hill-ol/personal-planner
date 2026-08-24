@@ -8,4 +8,5 @@ type Query {
     deadlines: [Deadline!]!
     socialEvents: [SocialEvent!]!
     items: [Item!]!
+    itemsForDateRange(startDate: DateTime!, endDate: DateTime!): [Item!]!
 }

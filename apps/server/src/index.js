@@ -3,14 +3,17 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { loadFilesSync } from '@graphql-tools/load-files';
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { PrismaClient } from '@prisma/client';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import { PrismaLibSql } from '@prisma/adapter-libsql';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
+const adapter = new PrismaLibSql({
+    url: process.env.DATABASE_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN,
+});
 const prisma = new PrismaClient({ adapter });
 
 const typeDefsArray = loadFilesSync(path.join(__dirname, '../schema'), {
@@ -42,6 +45,24 @@ const resolvers = {
             const items = await prisma.item.findMany({
                 include: { assignment: true, deadline: true, socialEvent: true },
             });
+            return items.map((item) => ({
+                ...item,
+                ...item.assignment,
+                ...item.deadline,
+                ...item.socialEvent,
+            }));
+        },
+        itemsForDateRange: async (_parent, args) => {
+            const items = await prisma.item.findMany({
+                where: {
+                    startDate: {
+                        gte: args.startDate,
+                        lte: args.endDate,
+                    },
+                },
+                include: { assignment: true, deadline: true, socialEvent: { include: { invitees: true } } },
+            });
+
             return items.map((item) => ({
                 ...item,
                 ...item.assignment,
@@ -173,6 +194,26 @@ const resolvers = {
                     },
                 },
             });
+        },
+        updateItemStatus: async (_parent, args) => {
+            const result = await prisma.item.update({
+                where: { id: args.id },
+                data: { status: args.status },
+                include: { assignment: true, deadline: true, socialEvent: { include: { invitees: true } } },
+            });
+
+            return {
+                ...result,
+                ...result.assignment,
+                ...result.deadline,
+                ...result.socialEvent,
+            };
+        },
+        deleteItem: async (_parent, args) => {
+            await prisma.item.delete({
+                where: { id: args.id },
+            });
+            return true;
         },
     },
     Item : {
