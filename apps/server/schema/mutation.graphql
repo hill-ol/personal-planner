@@ -1,0 +1,98 @@
+## Mutation Type
+type Mutation {
+    createPerson(input: CreatePersonInput!): Person!
+    createHabit(input: CreateHabitInput!): Habit!
+    createItem(input: CreateItemInput!): Item!
+    createCourse(input: CreateCourseInput!): Course!
+    createDayEntry(input: CreateDayEntryInput!): DayEntry!
+    createWeeklyRecap(input: CreateWeeklyRecapInput!): WeeklyRecap!
+    completeHabit(habitId: ID!): Habit!
+}
+
+## Persons
+input CreatePersonInput {
+    name: String!
+}
+
+## Recurrences
+input CreateRecurrenceInput {
+    frequency: RecurrenceFrequency!
+    interval: Int!
+    daysOfWeek: [Weekday!]
+    endCondition: RecurrenceEndCondition!
+    endDate: DateTime
+    occurrenceCount: Int
+    time: DateTime
+}
+
+## Habits
+input CreateHabitInput {
+    name: String!
+    recurrence: CreateRecurrenceInput!
+}
+
+## Items
+input CreateItemInput {
+    name: String!
+    startDate: DateTime!
+    time: DateTime
+    status: ItemStatus!
+    type: ItemType!
+    recurrence: CreateRecurrenceInput
+
+    assignmentDetails: CreateAssignmentDetailsInput
+    deadlineDetails: CreateDeadlineDetailsInput
+    socialEventDetails: CreateSocialEventDetailsInput
+}
+
+## Assignments
+input CreateAssignmentDetailsInput {
+    assignmentType: AssignmentType!
+    courseId: ID
+}
+
+## Deadlines
+input CreateDeadlineDetailsInput {
+    category: DeadlineCategory!
+}
+
+## Social Events
+input CreateSocialEventDetailsInput {
+    endDate: DateTime!
+    location: String
+    inviteeIds: [ID!]
+}
+
+## Courses
+input CreateCourseInput {
+    name: String!
+    instructor: String
+    location: String
+    color: String!
+    recurrence: CreateRecurrenceInput!
+}
+
+## Song Info
+input CreateSongInfoInput {
+    spotifyId: String!
+    title: String!
+    artist: String!
+    albumArtUrl: String
+}
+
+## Day Entry
+input CreateDayEntryInput {
+    date: DateTime!
+    mood: Mood
+    photo: String
+    songInfo: CreateSongInfoInput
+}
+
+## Weekly Recap
+input CreateWeeklyRecapInput {
+    weekStartDate: DateTime!
+    moodTrend: Mood
+    completionRate: Float!
+    highlightPhoto: String
+    songInfo: CreateSongInfoInput
+}

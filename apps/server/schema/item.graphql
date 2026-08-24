@@ -3,6 +3,12 @@ enum ItemStatus {
     DONE
 }
 
+enum ItemType {
+    ASSIGNMENT
+    DEADLINE
+    SOCIAL_EVENT
+}
+
 scalar DateTime
 scalar Time
 
