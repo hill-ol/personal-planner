@@ -13,7 +13,9 @@
     "@apollo/server": "^5.5.1",
     "@graphql-tools/load-files": "^7.0.1",
     "@graphql-tools/merge": "^9.2.2",
+    "@prisma/adapter-better-sqlite3": "^7.9.1",
     "@prisma/client": "^7.9.1",
+    "better-sqlite3": "^13.0.3",
     "graphql": "^16.14.2",
     "prisma": "^7.9.1"
   },

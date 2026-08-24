@@ -1,10 +1,9 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
 }
 
 enum ItemType {
@@ -62,8 +61,8 @@ model Item {
   status    ItemStatus
   type      ItemType
 
-  reccurenceId String?     @unique
-  recurrence   Recurrence? @relation(fields: [reccurenceId], references: [id])
+  recurenceId String?     @unique
+  recurrence   Recurrence? @relation(fields: [recurenceId], references: [id])
 
   assignment  Assignment?
   deadline    Deadline?
@@ -108,7 +107,7 @@ model Recurrence {
   daysOfWeek     String?
   endCondition   RecurrenceEndCondition
   endDate        DateTime?
-  occurenceCount Int?
+  occurrenceCount Int?
   time           DateTime?
 
   item   Item?
@@ -169,4 +168,14 @@ model SongInfo {
 
   dayEntry     DayEntry?
   weeklyRecap  WeeklyRecap?
+}
+
+model DayEntry {
+  id         String    @id @default(uuid())
+  date       DateTime
+  mood       Mood?
+  photo      String?
+
+  songInfoId String?   @unique
+  songInfo   SongInfo? @relation(fields: [songInfoId], references: [id])
 }

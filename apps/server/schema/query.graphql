@@ -1,3 +1,11 @@
 type Query {
-    _placeholder: String
+    habits: [Habit!]!
+    courses: [Course!]!
+    persons: [Person!]!
+    dayEntries: [DayEntry!]!
+    weeklyRecaps: [WeeklyRecap!]!
+    assignments: [Assignment!]!
+    deadlines: [Deadline!]!
+    socialEvents: [SocialEvent!]!
+    items: [Item!]!
 }
