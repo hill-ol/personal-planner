@@ -9,6 +9,7 @@ type Mutation {
     completeHabit(habitId: ID!): Habit!
     updateItemStatus(id: ID!, status: ItemStatus!): Item!
     deleteItem(id: ID!): Boolean!
+    logHabitProgress(habitId: ID!, date: DateTime!, quantity: Int): Habit!
 }
 
 ## Persons

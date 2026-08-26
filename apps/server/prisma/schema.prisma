@@ -10,6 +10,7 @@ enum ItemType {
   ASSIGNMENT
   DEADLINE
   SOCIAL_EVENT
+  TASK
 }
 
 enum ItemStatus {
@@ -133,6 +134,8 @@ model Habit {
   name          String
   currentStreak Int
   longestStreak Int
+  targetQuantity Int?
+  unit String?
 
   recurrenceId String     @unique
   recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
@@ -143,9 +146,12 @@ model Habit {
 model HabitCompletion {
   id          String   @id @default(uuid())
   completedAt DateTime
+  quantity Int?
 
   habitId String
   habit   Habit  @relation(fields: [habitId], references: [id])
+
+  @@unique([habitId, completedAt])
 }
 
 model WeeklyRecap {

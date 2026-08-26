@@ -112,6 +112,8 @@ const resolvers = {
                             : undefined,
                     },
                 };
+            } else if (type === 'TASK') {
+                // No subtype relation to create -- a Task is just the base Item row.
             }
 
             const result = await prisma.item.create({
@@ -215,12 +217,33 @@ const resolvers = {
             });
             return true;
         },
+        logHabitProgress: async (_parent, args) => {
+            const habit = await prisma.habit.findUnique({ where: { id: args.habitId } });
+
+            await prisma.habitCompletion.upsert({
+                where: {
+                    habitId_completedAt: { habitId: args.habitId, completedAt: args.date },
+                },
+                update: { quantity: args.quantity },
+                create: { habitId: args.habitId, completedAt: args.date, quantity: args.quantity },
+            });
+
+            const metTarget = args.quantity >= habit.targetQuantity;
+            const newCurrentStreak = metTarget ? habit.currentStreak + 1 : habit.currentStreak;
+            const newLongestStreak = Math.max(newCurrentStreak, habit.longestStreak);
+
+            return prisma.habit.update({
+                where: { id: args.habitId },
+                data: { currentStreak: newCurrentStreak, longestStreak: newLongestStreak },
+            });
+        },
     },
     Item : {
         __resolveType(item) {
             if (item.type === 'ASSIGNMENT') return 'Assignment';
             if (item.type === 'DEADLINE') return 'Deadline';
             if (item.type === 'SOCIAL_EVENT') return 'SocialEvent';
+            if (item.type === 'TASK') return 'Task';
             return null;
         },
     },
