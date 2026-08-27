@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: 16,
-        gap: 10,
     },
     text: {
+        paddingLeft: 40,
         ...typography.cardBody,
     },
     textDone: {
+        paddingLeft: 16,
         textDecorationLine: 'line-through',
         color: colors.typographyInactive,
     },

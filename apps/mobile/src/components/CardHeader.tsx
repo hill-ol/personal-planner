@@ -33,6 +33,5 @@ const styles = StyleSheet.create({
     },
     icon: {
         color: colors.primary,
-        paddingTop: 15,
     }
 });

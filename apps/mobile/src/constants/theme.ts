@@ -36,8 +36,6 @@ export const typography = {
     lineHeight: 28,
     letterSpacing: -0.2,
     color: colors.typographyHeading,
-    paddingLeft: 16,
-    paddingTop: 16,
   },
   cardBody: {
     fontFamily: fonts.sans,

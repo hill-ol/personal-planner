@@ -3,6 +3,9 @@ import { Inter_400Regular, Inter_600SemiBold, Inter_700Bold } from '@expo-google
 import * as SplashScreen from 'expo-splash-screen';
 import { Slot } from 'expo-router';
 import { useEffect } from 'react';
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
+import { apolloClient } from '@/lib/apolloClient';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,5 +28,9 @@ export default function RootLayout() {
         return null;
     }
 
-    return <Slot />;
+    return (
+        <ApolloProvider client={apolloClient}>
+            <Slot />
+        </ApolloProvider>
+    );
 }

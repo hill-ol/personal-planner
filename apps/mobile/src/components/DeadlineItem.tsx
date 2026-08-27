@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: 16,
-        gap: 0,
     },
     text: {
         ...typography.cardBody,
