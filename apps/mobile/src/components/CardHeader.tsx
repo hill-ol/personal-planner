@@ -1,11 +1,10 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { colors, fonts } from '@/constants/theme';
+import { colors, typography } from '@/constants/theme';
 
-type CardHeaderProps = {
+export type CardHeaderProps = {
     title: string;
     action?: {
-        icon: 'edit' | 'plus';
         onPress: () => void;
     };
 };
@@ -16,11 +15,7 @@ export function CardHeader({ title, action }: CardHeaderProps) {
             <Text style={styles.title}>{title}</Text>
             {action && (
                 <TouchableOpacity onPress={action.onPress} hitSlop={8}>
-                    <Feather
-                        name={action.icon === 'edit' ? 'edit-2' : 'plus'}
-                        size={18}
-                        color={colors.primary}
-                    />
+                    <Feather name="plus" size={18} style={styles.icon} />
                 </TouchableOpacity>
             )}
         </View>
@@ -34,10 +29,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontFamily: fonts.serif,
-        fontSize: 20,
-        lineHeight: 28,
-        letterSpacing: -0.2,
-        color: colors.typographyHeading,
+        ...typography.cardTitle,
     },
+    icon: {
+        color: colors.primary,
+        paddingTop: 15,
+    }
 });

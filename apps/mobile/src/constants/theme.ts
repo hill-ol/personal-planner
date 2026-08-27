@@ -3,8 +3,6 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import { Platform } from 'react-native';
-
 export const colors = {
   primary: '#B40065',
   primaryContainer: '#E10080',
@@ -20,6 +18,7 @@ export const colors = {
   typographyForm: '#8F6E78',
   formHeaders: '#5B3F48',
   textInputShade: '#F5EFED',
+  listDivider: '#EEE4DE',
 };
 
 export const fonts = {
@@ -31,23 +30,20 @@ export const fonts = {
 };
 
 export const typography = {
-  displayLarge: { fontFamily: fonts.serif, fontSize: 48 },
-  displayLargeMobile: { fontFamily: fonts.serif, fontSize: 32 },
-  headlineMedium: { fontFamily: fonts.sansSemiBold, fontSize: 24 },
-  titleLarge: { fontFamily: fonts.sansSemiBold, fontSize: 20 },
-  bodySmall: { fontFamily: fonts.sans, fontSize: 14 },
-  labelCaps: { fontFamily: fonts.sansBold, fontSize: 12, textTransform: 'uppercase' },
+  cardTitle: {
+    fontFamily: fonts.serif,
+    fontSize: 20,
+    lineHeight: 28,
+    letterSpacing: -0.2,
+    color: colors.typographyHeading,
+    paddingLeft: 16,
+    paddingTop: 16,
+  },
+  cardBody: {
+    fontFamily: fonts.sans,
+    fontSize: 16,
+    lineHeight: 24,
+    letterSpacing: 0,
+    color: colors.typographyHeading,
+  },
 };
-
-export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
-} as const;
-
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
