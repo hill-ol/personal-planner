@@ -3,53 +3,41 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import '@/global.css';
-
 import { Platform } from 'react-native';
 
-export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
-} as const;
+export const colors = {
+  primary: '#B40065',
+  primaryContainer: '#E10080',
+  secondary: '#4D644E',
+  secondaryContainer: '#CFEACD',
+  tertiary: '#386176',
+  tertiaryContainer: '#527990',
+  surfaceBackground: '#FFF8F3',
+  surfaceLowest: '#FFFFFF',
+  surfaceBorder: '#E8E1DC',
+  typographyHeading: '#1D1B18',
+  typographyInactive: '#6B7280',
+  typographyForm: '#8F6E78',
+  formHeaders: '#5B3F48',
+  textInputShade: '#F5EFED',
+};
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+export const fonts = {
+  serif: 'PlayfairDisplay_600SemiBold',
+  serifRegular: 'PlayfairDisplay_400Regular',
+  sans: 'Inter_400Regular',
+  sansSemiBold: 'Inter_600SemiBold',
+  sansBold: 'Inter_700Bold',
+};
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
+export const typography = {
+  displayLarge: { fontFamily: fonts.serif, fontSize: 48 },
+  displayLargeMobile: { fontFamily: fonts.serif, fontSize: 32 },
+  headlineMedium: { fontFamily: fonts.sansSemiBold, fontSize: 24 },
+  titleLarge: { fontFamily: fonts.sansSemiBold, fontSize: 20 },
+  bodySmall: { fontFamily: fonts.sans, fontSize: 14 },
+  labelCaps: { fontFamily: fonts.sansBold, fontSize: 12, textTransform: 'uppercase' },
+};
 
 export const Spacing = {
   half: 2,
