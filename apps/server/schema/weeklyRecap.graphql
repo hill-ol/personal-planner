@@ -1,8 +1,17 @@
+type Highlight {
+    id: ID!
+    title: String!
+    detail: String
+    icon: String!
+}
+
 type WeeklyRecap {
     id: ID!
     weekStartDate: DateTime!
     topSong: SongInfo
     moodTrend: Mood
     completionRate: Float!
+    tasksCompletedCount: Int!
     highlightPhoto: String
+    highlights: [Highlight!]!
 }

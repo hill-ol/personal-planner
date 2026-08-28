@@ -7,6 +7,7 @@ type Query {
     assignments: [Assignment!]!
     deadlines: [Deadline!]!
     socialEvents: [SocialEvent!]!
+    achievements: [Achievement!]!
     items: [Item!]!
     itemsForDateRange(startDate: DateTime!, endDate: DateTime!): [Item!]!
 }

@@ -3,5 +3,8 @@
   "private": true,
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@expo/vector-icons": "^15.1.1"
+  }
 }

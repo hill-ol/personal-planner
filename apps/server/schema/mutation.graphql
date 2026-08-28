@@ -71,7 +71,7 @@ input CreateCourseInput {
     name: String!
     instructor: String
     location: String
-    color: String!
+    icon: String!
     recurrence: CreateRecurrenceInput!
 }
 
@@ -92,10 +92,18 @@ input CreateDayEntryInput {
 }
 
 ## Weekly Recap
+input CreateHighlightInput {
+    title: String!
+    detail: String
+    icon: String!
+}
+
 input CreateWeeklyRecapInput {
     weekStartDate: DateTime!
     moodTrend: Mood
     completionRate: Float!
+    tasksCompletedCount: Int!
     highlightPhoto: String
     songInfo: CreateSongInfoInput
+    highlights: [CreateHighlightInput!]
 }

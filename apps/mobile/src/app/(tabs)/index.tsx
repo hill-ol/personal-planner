@@ -6,6 +6,7 @@ import { TasksCard } from '@/components/TasksCard';
 import { CoursesCard } from '@/components/CoursesCard';
 import { DeadlinesCard } from '@/components/DeadlineCard';
 import { colors } from '@/constants/theme';
+import { AddItemModal } from "@/components/AddItemModal";
 
 const DASHBOARD_QUERY: TypedDocumentNode<DashboardData> = gql`
     query DashboardData {
@@ -73,6 +74,7 @@ export default function Dashboard() {
 
     return (
         <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+            <AddItemModal visible={true} onClose={() => {}} />
             <TodaysFocusCard
                 focus="Complete the Q3 financial review and send the draft to the board. This is the main blocking task for the week."
                 onEdit={() => {}}

@@ -1,0 +1,13 @@
+enum AchievementType {
+    SEVEN_DAY_STREAK
+    EARLY_BIRD
+    THIRTY_DAY_STREAK
+    PERFECT_WEEK
+}
+
+type Achievement {
+    id: ID!
+    type: AchievementType!
+    earnedAt: DateTime!
+    habitId: ID
+}

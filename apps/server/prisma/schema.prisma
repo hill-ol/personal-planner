@@ -54,6 +54,13 @@ enum Mood {
   SAD
 }
 
+enum AchievementType {
+  SEVEN_DAY_STREAK
+  EARLY_BIRD
+  THIRTY_DAY_STREAK
+  PERFECT_WEEK
+}
+
 model Item {
   id        String     @id @default(uuid())
   name      String
@@ -121,7 +128,7 @@ model Course {
   name       String
   instructor String?
   location   String?
-  color      String
+  icon       String
 
   recurrenceId String     @unique
   recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
@@ -141,6 +148,16 @@ model Habit {
   recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
 
   completions  HabitCompletion[]
+  achievements Achievement[]
+}
+
+model Achievement {
+  id       String          @id @default(uuid())
+  type     AchievementType
+  earnedAt DateTime
+
+  habitId String?
+  habit   Habit?  @relation(fields: [habitId], references: [id])
 }
 
 model HabitCompletion {
@@ -155,14 +172,27 @@ model HabitCompletion {
 }
 
 model WeeklyRecap {
-  id             String   @id @default(uuid())
-  weekStartDate  DateTime
-  moodTrend      Mood?
-  completionRate Float
-  highlightPhoto String?
+  id                  String   @id @default(uuid())
+  weekStartDate       DateTime
+  moodTrend           Mood?
+  completionRate      Float
+  tasksCompletedCount Int
+  highlightPhoto      String?
 
   songInfoId String?   @unique
   songInfo   SongInfo? @relation(fields: [songInfoId], references: [id])
+
+  highlights Highlight[]
+}
+
+model Highlight {
+  id     String  @id @default(uuid())
+  title  String
+  detail String?
+  icon   String
+
+  weeklyRecapId String
+  weeklyRecap   WeeklyRecap @relation(fields: [weeklyRecapId], references: [id], onDelete: Cascade)
 }
 
 model SongInfo {

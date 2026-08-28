@@ -4,5 +4,5 @@ type Course {
     instructor: String
     location: String
     recurrence: Recurrence!
-    color: String!
+    icon: String!
 }
