@@ -15,6 +15,10 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
                 onDayPress={(day) => onChange(day.dateString)}
                 markedDates={value ? { [value]: { selected: true, selectedColor: colors.primary } } : {}}
                 theme={{
+                    // The Calendar paints its own surface, so the container's
+                    // backgroundColor alone leaves it white.
+                    backgroundColor: colors.surfaceBackground,
+                    calendarBackground: colors.surfaceBackground,
                     textSectionTitleColor: colors.typographyInactive,
                     selectedDayBackgroundColor: colors.primary,
                     selectedDayTextColor: colors.surfaceLowest,
