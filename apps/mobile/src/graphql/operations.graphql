@@ -1,0 +1,44 @@
+query DashboardData {
+    items {
+        id
+        name
+        status
+        __typename
+        ... on Deadline {
+            category
+        }
+    }
+    courses {
+        id
+        name
+        icon
+    }
+}
+
+mutation UpdateItemStatus($id: ID!, $status: ItemStatus!) {
+    updateItemStatus(id: $id, status: $status) {
+        id
+        status
+    }
+}
+
+query Persons {
+    persons {
+        id
+        name
+    }
+}
+
+mutation CreatePerson($name: String!) {
+    createPerson(input: { name: $name }) {
+        id
+        name
+    }
+}
+
+query Courses {
+    courses {
+        id
+        name
+    }
+}

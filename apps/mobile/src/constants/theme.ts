@@ -44,4 +44,12 @@ export const typography = {
     letterSpacing: 0,
     color: colors.typographyHeading,
   },
+  /** Uppercase section label above a form field: START TIME, CATEGORY, ... */
+  fieldLabel: {
+    fontFamily: fonts.sansSemiBold,
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0.7,
+    color: colors.formHeaders,
+  },
 };

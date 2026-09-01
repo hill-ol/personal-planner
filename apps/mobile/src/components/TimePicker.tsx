@@ -75,10 +75,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     label: {
-        ...typography.cardBody,
-        fontSize: 14,
-        letterSpacing: 0.7,
-        color: colors.formHeaders,
+        ...typography.fieldLabel,
     },
     row: {
         flexDirection: 'row',
