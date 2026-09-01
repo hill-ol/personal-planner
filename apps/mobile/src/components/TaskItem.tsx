@@ -1,6 +1,8 @@
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { colors, typography } from '@/constants/theme';
+
+const CHECK_SIZE = 24;
 
 type TaskItemProps = {
     id: string;
@@ -12,7 +14,11 @@ type TaskItemProps = {
 export function TaskItem({ id, name, isDone, onToggle }: TaskItemProps) {
     return (
         <TouchableOpacity style={styles.row} onPress={() => onToggle(id)} hitSlop={8}>
-            {isDone && <Feather name="check" size={24} color={colors.primary} />}
+            {/* The slot is always rendered so the label sits at the same x
+                whether the check is showing. */}
+            <View style={styles.checkSlot}>
+                {isDone && <Feather name="check" size={CHECK_SIZE} color={colors.primary} />}
+            </View>
             <Text style={[styles.text, isDone && styles.textDone]}>{name}</Text>
         </TouchableOpacity>
     );
@@ -22,13 +28,16 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
+        gap: 16,
+    },
+    checkSlot: {
+        width: CHECK_SIZE,
+        alignItems: 'center',
     },
     text: {
-        paddingLeft: 40,
         ...typography.cardBody,
     },
     textDone: {
-        paddingLeft: 16,
         textDecorationLine: 'line-through',
         color: colors.typographyInactive,
     },

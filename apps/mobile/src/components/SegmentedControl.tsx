@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors, typography } from '@/constants/theme';
+import {colors, fonts, typography} from '@/constants/theme';
 
 type SegmentedControlProps<T extends string> = {
     options: { label: string; value: T }[];
@@ -28,25 +28,26 @@ export function SegmentedControl<T extends string>({ options, value, onChange }:
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        backgroundColor: colors.textInputShade,
-        borderRadius: 12,
-        padding: 4,
+        backgroundColor: colors.surfaceBackground,
+        borderRadius: 16,
+        padding: 5,
     },
     segment: {
         flex: 1,
         paddingVertical: 8,
         alignItems: 'center',
-        borderRadius: 8,
+        borderRadius: 12,
     },
     segmentActive: {
         backgroundColor: colors.surfaceLowest,
     },
     label: {
         ...typography.cardBody,
+        fontFamily: fonts.sansSemiBold,
         fontSize: 14,
-        color: colors.typographyInactive,
+        color: colors.typographyHeading,
     },
     labelActive: {
-        color: colors.typographyHeading,
+        color: colors.primary,
     },
 });

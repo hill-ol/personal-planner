@@ -15,7 +15,7 @@ export function CardHeader({ title, action }: CardHeaderProps) {
             <Text style={styles.title}>{title}</Text>
             {action && (
                 <TouchableOpacity onPress={action.onPress} hitSlop={8}>
-                    <Feather name="plus" size={18} style={styles.icon} />
+                    <Feather name="plus" size={18} color={colors.primary} />
                 </TouchableOpacity>
             )}
         </View>
@@ -31,7 +31,4 @@ const styles = StyleSheet.create({
     title: {
         ...typography.cardTitle,
     },
-    icon: {
-        color: colors.primary,
-    }
 });
